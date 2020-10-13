@@ -1,14 +1,15 @@
-<div>
-  Amplify
-</div>
-
-<button (click)="click()">
-  Create
+<button (click)="createClick()">
+  Create Circle
 </button>
 
 <div>
-  <svg class="circle-container" (mouseout)="circleClickUp()" >
+  <!-- <svg class="circle-container" (mouseout)="circleClickUp()" >
     <circle (mousedown)="circleClickDown()" (mousemove)="circleMouseMove($event)" (mouseup)="circleClickUp()" [attr.cx]="circleX" [attr.cy]="circleY" [attr.r]="circleRadius"
       stroke="black" stroke-width="1" fill="red" />
+  </svg> -->
+  <svg class="circle-container">
+    <circle *ngFor="let circle of circles" (mousedown)="circleClickDown(circle.id)"
+      (mousemove)="circleMouseMove($event)" (mouseup)="circleClickUp(circle.id)" [attr.cx]="circle.x"
+      [attr.cy]="circle.y" [attr.r]="circleRadius" stroke="black" stroke-width="1" fill="red" />
   </svg>
 </div>

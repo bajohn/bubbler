@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Restaurant } from 'src/types/Restaurant';
+import { Restaurant, Circle } from 'src/types/Restaurant';
 import { APIService } from './API.service';
 
 @Component({
@@ -9,10 +9,11 @@ import { APIService } from './API.service';
 })
 export class AppComponent implements OnInit {
   restaurants: Restaurant[] = [];
-  circleX = 100;
-  circleY = 100;
+  circles: Circle[] = [];
+
   readonly circleRadius = 50;
   circleDrag = false;
+  idxFromId: { [key: number]: number } = {};
   constructor(private api: APIService) {
   }
 
@@ -21,46 +22,67 @@ export class AppComponent implements OnInit {
   }
 
   async initialize() {
-    this.api.OnCreateRestaurantListener.subscribe((event: any) => {
-      console.log(event);
-      const newRestaurant = event.value.data.onCreateRestaurant;
-      this.restaurants = [newRestaurant, ...this.restaurants];
-    });
 
-    const resp = await this.api.ListRestaurants();
-    this.restaurants = resp.items.map(el => {
-      console.log(el);
+    this.api.OnCreateCircleListener.subscribe((event: any) => {
+      console.log(event);
+      const newCircle = event.value.data.onCreateCircle;
+      this.circles = [newCircle, ...this.circles];
+    })
+
+
+    this.api.OnUpdateCircleListener.subscribe((event: any) => {
+      console.log(event);
+      const newCircle = event.value.data.onUpdateCircle as Circle;
+      const idx = this.idxFromId[newCircle.id];
+      this.circles[idx].x = newCircle.x;
+      this.circles[idx].y = newCircle.y;
+    })
+
+
+    const resp = await this.api.ListCircles();
+    this.circles = resp.items.map((el, idx) => {
+      this.idxFromId[el.id] = idx;
       return {
-        city: el.city,
-        description: el.description,
+        x: el.x,
+        y: el.y,
         id: el.id,
-        name: el.name,
-        neighborhood: el.neighborhood
+        mouseDown: false
       }
     });
+
+
+
   }
 
-  click() {
+  createClick() {
     console.log('click');
-    const restaurant: Restaurant = {
-      city: 'Washington',
-      description: 'Arepas',
-      name: 'The Royal',
-      neighborhood: 'Shaw'
+    const circle: Circle = {
+      x: 100,
+      y: 100
     };
-    this.api.CreateRestaurant(restaurant)
+    this.api.CreateCircle(circle)
   }
 
-  circleClickDown() {
-    this.circleDrag = true;
+  circleClickDown(id) {
+    const idx = this.idxFromId[id];
+    this.circles[idx].mouseDown = true;
   }
-  circleClickUp() {
-    this.circleDrag = false;
+  circleClickUp(id) {
+    const idx = this.idxFromId[id];
+    this.circles[idx].mouseDown = false;
   }
   circleMouseMove(event: MouseEvent) {
-    if (this.circleDrag) {
-      this.circleX = event.x;
-      this.circleY = event.y - this.circleRadius;
+    for (const circle of this.circles) {
+      if (circle.mouseDown) {
+        // circle.x = event.x;
+        // circle.y = event.y;
+        this.api.UpdateCircle({
+          x: event.x,
+          y: event.y,
+          id: circle.id
+        })
+
+      }
     }
 
   }

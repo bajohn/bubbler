@@ -5,3 +5,10 @@ export type Restaurant = {
     city: string,
     neighborhood: string
   }; 
+
+  export type Circle = {
+    id? : string,
+    x : number,
+    y : number,
+    mouseDown?: boolean
+  }; 
