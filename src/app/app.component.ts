@@ -9,6 +9,10 @@ import { APIService } from './API.service';
 })
 export class AppComponent implements OnInit {
   restaurants: Restaurant[] = [];
+  circleX = 100;
+  circleY = 100;
+  readonly circleRadius = 50;
+  circleDrag = false;
   constructor(private api: APIService) {
   }
 
@@ -25,11 +29,13 @@ export class AppComponent implements OnInit {
 
     const resp = await this.api.ListRestaurants();
     this.restaurants = resp.items.map(el => {
+      console.log(el);
       return {
         city: el.city,
         description: el.description,
         id: el.id,
-        name: el.name
+        name: el.name,
+        neighborhood: el.neighborhood
       }
     });
   }
@@ -38,10 +44,25 @@ export class AppComponent implements OnInit {
     console.log('click');
     const restaurant: Restaurant = {
       city: 'Washington',
-      description: 'RIP',
-      name: 'Satellite',
+      description: 'Arepas',
+      name: 'The Royal',
+      neighborhood: 'Shaw'
     };
     this.api.CreateRestaurant(restaurant)
+  }
+
+  circleClickDown() {
+    this.circleDrag = true;
+  }
+  circleClickUp() {
+    this.circleDrag = false;
+  }
+  circleMouseMove(event: MouseEvent) {
+    if (this.circleDrag) {
+      this.circleX = event.x;
+      this.circleY = event.y - this.circleRadius;
+    }
+
   }
 
 

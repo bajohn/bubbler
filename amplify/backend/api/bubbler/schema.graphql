@@ -1,6 +1,13 @@
 type Restaurant @model {
-  id: ID!
-  name: String!
-  description: String!
-  city: String!
+  id: ID
+  name: String
+  description: String
+  city: String
+  neighborhood: String
+}
+
+type Circle @model {
+  id: ID
+  x: Int
+  y: Int
 }

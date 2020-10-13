@@ -5,6 +5,7 @@ subscription OnCreateRestaurant {
     name
     description
     city
+    neighborhood
     createdAt
     updatedAt
   }
@@ -15,6 +16,7 @@ subscription OnUpdateRestaurant {
     name
     description
     city
+    neighborhood
     createdAt
     updatedAt
   }
@@ -25,6 +27,34 @@ subscription OnDeleteRestaurant {
     name
     description
     city
+    neighborhood
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateCircle {
+  onCreateCircle {
+    id
+    x
+    y
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateCircle {
+  onUpdateCircle {
+    id
+    x
+    y
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteCircle {
+  onDeleteCircle {
+    id
+    x
+    y
     createdAt
     updatedAt
   }

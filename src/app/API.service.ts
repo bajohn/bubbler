@@ -7,15 +7,17 @@ import { Observable } from "zen-observable-ts";
 
 export type CreateRestaurantInput = {
   id?: string | null;
-  name: string;
-  description: string;
-  city: string;
+  name?: string | null;
+  description?: string | null;
+  city?: string | null;
+  neighborhood?: string | null;
 };
 
 export type ModelRestaurantConditionInput = {
   name?: ModelStringInput | null;
   description?: ModelStringInput | null;
   city?: ModelStringInput | null;
+  neighborhood?: ModelStringInput | null;
   and?: Array<ModelRestaurantConditionInput | null> | null;
   or?: Array<ModelRestaurantConditionInput | null> | null;
   not?: ModelRestaurantConditionInput | null;
@@ -65,9 +67,46 @@ export type UpdateRestaurantInput = {
   name?: string | null;
   description?: string | null;
   city?: string | null;
+  neighborhood?: string | null;
 };
 
 export type DeleteRestaurantInput = {
+  id?: string | null;
+};
+
+export type CreateCircleInput = {
+  id?: string | null;
+  x?: number | null;
+  y?: number | null;
+};
+
+export type ModelCircleConditionInput = {
+  x?: ModelIntInput | null;
+  y?: ModelIntInput | null;
+  and?: Array<ModelCircleConditionInput | null> | null;
+  or?: Array<ModelCircleConditionInput | null> | null;
+  not?: ModelCircleConditionInput | null;
+};
+
+export type ModelIntInput = {
+  ne?: number | null;
+  eq?: number | null;
+  le?: number | null;
+  lt?: number | null;
+  ge?: number | null;
+  gt?: number | null;
+  between?: Array<number | null> | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
+};
+
+export type UpdateCircleInput = {
+  id: string;
+  x?: number | null;
+  y?: number | null;
+};
+
+export type DeleteCircleInput = {
   id?: string | null;
 };
 
@@ -76,6 +115,7 @@ export type ModelRestaurantFilterInput = {
   name?: ModelStringInput | null;
   description?: ModelStringInput | null;
   city?: ModelStringInput | null;
+  neighborhood?: ModelStringInput | null;
   and?: Array<ModelRestaurantFilterInput | null> | null;
   or?: Array<ModelRestaurantFilterInput | null> | null;
   not?: ModelRestaurantFilterInput | null;
@@ -97,42 +137,82 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null;
 };
 
+export type ModelCircleFilterInput = {
+  id?: ModelIDInput | null;
+  x?: ModelIntInput | null;
+  y?: ModelIntInput | null;
+  and?: Array<ModelCircleFilterInput | null> | null;
+  or?: Array<ModelCircleFilterInput | null> | null;
+  not?: ModelCircleFilterInput | null;
+};
+
 export type CreateRestaurantMutation = {
   __typename: "Restaurant";
-  id: string;
-  name: string;
-  description: string;
-  city: string;
+  id: string | null;
+  name: string | null;
+  description: string | null;
+  city: string | null;
+  neighborhood: string | null;
   createdAt: string;
   updatedAt: string;
 };
 
 export type UpdateRestaurantMutation = {
   __typename: "Restaurant";
-  id: string;
-  name: string;
-  description: string;
-  city: string;
+  id: string | null;
+  name: string | null;
+  description: string | null;
+  city: string | null;
+  neighborhood: string | null;
   createdAt: string;
   updatedAt: string;
 };
 
 export type DeleteRestaurantMutation = {
   __typename: "Restaurant";
-  id: string;
-  name: string;
-  description: string;
-  city: string;
+  id: string | null;
+  name: string | null;
+  description: string | null;
+  city: string | null;
+  neighborhood: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateCircleMutation = {
+  __typename: "Circle";
+  id: string | null;
+  x: number | null;
+  y: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateCircleMutation = {
+  __typename: "Circle";
+  id: string | null;
+  x: number | null;
+  y: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteCircleMutation = {
+  __typename: "Circle";
+  id: string | null;
+  x: number | null;
+  y: number | null;
   createdAt: string;
   updatedAt: string;
 };
 
 export type GetRestaurantQuery = {
   __typename: "Restaurant";
-  id: string;
-  name: string;
-  description: string;
-  city: string;
+  id: string | null;
+  name: string | null;
+  description: string | null;
+  city: string | null;
+  neighborhood: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -141,10 +221,33 @@ export type ListRestaurantsQuery = {
   __typename: "ModelRestaurantConnection";
   items: Array<{
     __typename: "Restaurant";
-    id: string;
-    name: string;
-    description: string;
-    city: string;
+    id: string | null;
+    name: string | null;
+    description: string | null;
+    city: string | null;
+    neighborhood: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  nextToken: string | null;
+};
+
+export type GetCircleQuery = {
+  __typename: "Circle";
+  id: string | null;
+  x: number | null;
+  y: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListCirclesQuery = {
+  __typename: "ModelCircleConnection";
+  items: Array<{
+    __typename: "Circle";
+    id: string | null;
+    x: number | null;
+    y: number | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
@@ -153,30 +256,60 @@ export type ListRestaurantsQuery = {
 
 export type OnCreateRestaurantSubscription = {
   __typename: "Restaurant";
-  id: string;
-  name: string;
-  description: string;
-  city: string;
+  id: string | null;
+  name: string | null;
+  description: string | null;
+  city: string | null;
+  neighborhood: string | null;
   createdAt: string;
   updatedAt: string;
 };
 
 export type OnUpdateRestaurantSubscription = {
   __typename: "Restaurant";
-  id: string;
-  name: string;
-  description: string;
-  city: string;
+  id: string | null;
+  name: string | null;
+  description: string | null;
+  city: string | null;
+  neighborhood: string | null;
   createdAt: string;
   updatedAt: string;
 };
 
 export type OnDeleteRestaurantSubscription = {
   __typename: "Restaurant";
-  id: string;
-  name: string;
-  description: string;
-  city: string;
+  id: string | null;
+  name: string | null;
+  description: string | null;
+  city: string | null;
+  neighborhood: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnCreateCircleSubscription = {
+  __typename: "Circle";
+  id: string | null;
+  x: number | null;
+  y: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateCircleSubscription = {
+  __typename: "Circle";
+  id: string | null;
+  x: number | null;
+  y: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteCircleSubscription = {
+  __typename: "Circle";
+  id: string | null;
+  x: number | null;
+  y: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -196,6 +329,7 @@ export class APIService {
           name
           description
           city
+          neighborhood
           createdAt
           updatedAt
         }
@@ -222,6 +356,7 @@ export class APIService {
           name
           description
           city
+          neighborhood
           createdAt
           updatedAt
         }
@@ -248,6 +383,7 @@ export class APIService {
           name
           description
           city
+          neighborhood
           createdAt
           updatedAt
         }
@@ -263,6 +399,81 @@ export class APIService {
     )) as any;
     return <DeleteRestaurantMutation>response.data.deleteRestaurant;
   }
+  async CreateCircle(
+    input: CreateCircleInput,
+    condition?: ModelCircleConditionInput
+  ): Promise<CreateCircleMutation> {
+    const statement = `mutation CreateCircle($input: CreateCircleInput!, $condition: ModelCircleConditionInput) {
+        createCircle(input: $input, condition: $condition) {
+          __typename
+          id
+          x
+          y
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateCircleMutation>response.data.createCircle;
+  }
+  async UpdateCircle(
+    input: UpdateCircleInput,
+    condition?: ModelCircleConditionInput
+  ): Promise<UpdateCircleMutation> {
+    const statement = `mutation UpdateCircle($input: UpdateCircleInput!, $condition: ModelCircleConditionInput) {
+        updateCircle(input: $input, condition: $condition) {
+          __typename
+          id
+          x
+          y
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateCircleMutation>response.data.updateCircle;
+  }
+  async DeleteCircle(
+    input: DeleteCircleInput,
+    condition?: ModelCircleConditionInput
+  ): Promise<DeleteCircleMutation> {
+    const statement = `mutation DeleteCircle($input: DeleteCircleInput!, $condition: ModelCircleConditionInput) {
+        deleteCircle(input: $input, condition: $condition) {
+          __typename
+          id
+          x
+          y
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteCircleMutation>response.data.deleteCircle;
+  }
   async GetRestaurant(id: string): Promise<GetRestaurantQuery> {
     const statement = `query GetRestaurant($id: ID!) {
         getRestaurant(id: $id) {
@@ -271,6 +482,7 @@ export class APIService {
           name
           description
           city
+          neighborhood
           createdAt
           updatedAt
         }
@@ -297,6 +509,7 @@ export class APIService {
             name
             description
             city
+            neighborhood
             createdAt
             updatedAt
           }
@@ -318,6 +531,59 @@ export class APIService {
     )) as any;
     return <ListRestaurantsQuery>response.data.listRestaurants;
   }
+  async GetCircle(id: string): Promise<GetCircleQuery> {
+    const statement = `query GetCircle($id: ID!) {
+        getCircle(id: $id) {
+          __typename
+          id
+          x
+          y
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetCircleQuery>response.data.getCircle;
+  }
+  async ListCircles(
+    filter?: ModelCircleFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListCirclesQuery> {
+    const statement = `query ListCircles($filter: ModelCircleFilterInput, $limit: Int, $nextToken: String) {
+        listCircles(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            x
+            y
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListCirclesQuery>response.data.listCircles;
+  }
   OnCreateRestaurantListener: Observable<
     OnCreateRestaurantSubscription
   > = API.graphql(
@@ -329,6 +595,7 @@ export class APIService {
           name
           description
           city
+          neighborhood
           createdAt
           updatedAt
         }
@@ -347,6 +614,7 @@ export class APIService {
           name
           description
           city
+          neighborhood
           createdAt
           updatedAt
         }
@@ -365,10 +633,56 @@ export class APIService {
           name
           description
           city
+          neighborhood
           createdAt
           updatedAt
         }
       }`
     )
   ) as Observable<OnDeleteRestaurantSubscription>;
+
+  OnCreateCircleListener: Observable<OnCreateCircleSubscription> = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateCircle {
+        onCreateCircle {
+          __typename
+          id
+          x
+          y
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<OnCreateCircleSubscription>;
+
+  OnUpdateCircleListener: Observable<OnUpdateCircleSubscription> = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateCircle {
+        onUpdateCircle {
+          __typename
+          id
+          x
+          y
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<OnUpdateCircleSubscription>;
+
+  OnDeleteCircleListener: Observable<OnDeleteCircleSubscription> = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteCircle {
+        onDeleteCircle {
+          __typename
+          id
+          x
+          y
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<OnDeleteCircleSubscription>;
 }

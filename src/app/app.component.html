@@ -6,19 +6,9 @@
   Create
 </button>
 
-<div *ngFor="let restaurant of restaurants">
-  <div>
-    {{restaurant.name}}
-  </div>
-
-  <div>
-    {{restaurant.description}}
-  </div>
-  <div>
-    {{restaurant.city}}
-  </div>
-  <div>
-    {{restaurant.id}}
-  </div>
-  -------------
+<div>
+  <svg class="circle-container" (mouseout)="circleClickUp()" >
+    <circle (mousedown)="circleClickDown()" (mousemove)="circleMouseMove($event)" (mouseup)="circleClickUp()" [attr.cx]="circleX" [attr.cy]="circleY" [attr.r]="circleRadius"
+      stroke="black" stroke-width="1" fill="red" />
+  </svg>
 </div>

@@ -5,6 +5,7 @@ query GetRestaurant($id: ID!) {
     name
     description
     city
+    neighborhood
     createdAt
     updatedAt
   }
@@ -20,6 +21,32 @@ query ListRestaurants(
       name
       description
       city
+      neighborhood
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetCircle($id: ID!) {
+  getCircle(id: $id) {
+    id
+    x
+    y
+    createdAt
+    updatedAt
+  }
+}
+query ListCircles(
+  $filter: ModelCircleFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listCircles(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      x
+      y
       createdAt
       updatedAt
     }

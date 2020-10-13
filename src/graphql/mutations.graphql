@@ -8,6 +8,7 @@ mutation CreateRestaurant(
     name
     description
     city
+    neighborhood
     createdAt
     updatedAt
   }
@@ -21,6 +22,7 @@ mutation UpdateRestaurant(
     name
     description
     city
+    neighborhood
     createdAt
     updatedAt
   }
@@ -34,6 +36,43 @@ mutation DeleteRestaurant(
     name
     description
     city
+    neighborhood
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateCircle(
+  $input: CreateCircleInput!
+  $condition: ModelCircleConditionInput
+) {
+  createCircle(input: $input, condition: $condition) {
+    id
+    x
+    y
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateCircle(
+  $input: UpdateCircleInput!
+  $condition: ModelCircleConditionInput
+) {
+  updateCircle(input: $input, condition: $condition) {
+    id
+    x
+    y
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteCircle(
+  $input: DeleteCircleInput!
+  $condition: ModelCircleConditionInput
+) {
+  deleteCircle(input: $input, condition: $condition) {
+    id
+    x
+    y
     createdAt
     updatedAt
   }
