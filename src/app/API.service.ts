@@ -474,6 +474,19 @@ export class APIService {
     )) as any;
     return <DeleteCircleMutation>response.data.deleteCircle;
   }
+  async Bubblerhandler(msg?: string): Promise<string | null> {
+    const statement = `query Bubblerhandler($msg: String) {
+        bubblerhandler(msg: $msg)
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (msg) {
+      gqlAPIServiceArguments.msg = msg;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <string | null>response.data.bubblerhandler;
+  }
   async GetRestaurant(id: string): Promise<GetRestaurantQuery> {
     const statement = `query GetRestaurant($id: ID!) {
         getRestaurant(id: $id) {

@@ -11,3 +11,7 @@ type Circle @model {
   x: Int
   y: Int
 }
+
+type Query {
+  bubblerhandler(msg: String): String
+}

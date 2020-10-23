@@ -17,6 +17,13 @@
       }
     }
   },
-  "function": {},
+  "function": {
+    "bubblerhandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": []
+    }
+  },
   "storage": {}
 }
