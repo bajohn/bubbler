@@ -2,6 +2,9 @@
 query Bubblerhandler($msg: String) {
   bubblerhandler(msg: $msg)
 }
+query Echo($msg: String) {
+  echo(msg: $msg)
+}
 query GetRestaurant($id: ID!) {
   getRestaurant(id: $id) {
     id

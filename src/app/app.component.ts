@@ -29,7 +29,9 @@ export class AppComponent implements OnInit {
       this.circles = [newCircle, ...this.circles];
     })
 
-    const works = await this.api.Bubblerhandler('test');
+    //const works = await this.api.Bubblerhandler('test');
+
+    const works = await this.api.Echo('test');
 
     console.log('eh', works);
     this.api.OnUpdateCircleListener.subscribe((event: any) => {

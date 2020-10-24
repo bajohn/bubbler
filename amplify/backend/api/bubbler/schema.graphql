@@ -14,4 +14,5 @@ type Circle @model {
 
 type Query {
   bubblerhandler(msg: String): String
+  echo(msg: String): String
 }
