@@ -1,5 +1,7 @@
 # Bubbler
 
+This repo is done with- leaving this as a sandbox project for getting amplify/appsync to compile/deploy.
+
 ## Amplify<->Lambda connection via aws console
 Connect Lambda to amplify:
 
